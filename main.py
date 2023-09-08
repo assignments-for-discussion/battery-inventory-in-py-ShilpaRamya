@@ -7,18 +7,18 @@ def count_batteries_by_health(present_capacities):
   }
 def calculate_soh(present_capacity, rated_capacity):
   try:
-        soh_percentage = (present_capacity / rated_capacity) * 100
+    soh_percentage = (present_capacity / rated_capacity) * 100
         return soh_percentage
   except ZeroDivisionError:
-        print("Error: Rated capacity cannot be zero.")
-        return None
+    print("Error: Rated capacity cannot be zero.")
+    return None
 def classify_batteries(present_capacities):
   healthy_count = 0
   exchange_count = 0
   failed_count = 0
 
   for present_capacity in present_capacities:
-        rated_capacity = 120  # Rated capacity of all batteries is 120 Ah
+    rated_capacity = 120  # Rated capacity of all batteries is 120 Ah
 
         # Calculate State of Health (SoH) for the current battery
         soh_percentage = (present_capacity / rated_capacity) * 100
@@ -31,12 +31,12 @@ def classify_batteries(present_capacities):
         else:
             failed_count += 1
 
-  return healthy_count, exchange_count, failed_count
+return healthy_count, exchange_count, failed_count
 
 def test_bucketing_by_health():
   print("Counting batteries by SoH...\n")
   present_capacities = [115, 118, 80, 95, 91, 77]
-  counts = count_batteries_by_health(present_capacities)
+  counts = classify_batteries(present_capacities)
   
   assert(counts["healthy"] == 2)
   assert(counts["exchange"] == 3)
